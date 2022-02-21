@@ -1,0 +1,48 @@
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+
+	$extmods: (
+		eot: "?",
+		svg: "#" + str-replace($name, " ", "_")
+	);
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype"
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+//@include font-face( 'Gilroy', '../fonts/Gilroy-Regular', 400, normal, eot woff2 woff ttf);
+//@include font-face( 'Gilroy', '../fonts/Gilroy-Medium', 500, normal, eot woff2 woff ttf);
+//@include font-face( 'Gilroy', '../fonts/Gilroy-Bold', 600, normal, eot woff2 woff ttf);
+
+
+
+@include font-face( 'Inter', '../fonts/Inter-Black', 900, normal, ttf );
+@include font-face( 'Inter', '../fonts/Inter-Regular', 400, normal, ttf );
+
+@include font-face( 'Montserrat', '../fonts/Montserrat-Bold', 700, normal, ttf );
+@include font-face( 'Montserrat', '../fonts/Montserrat-ExtraBold', 800, normal, ttf );
+@include font-face( 'Montserrat', '../fonts/Montserrat-Light', 300, normal, ttf );
+@include font-face( 'Montserrat', '../fonts/Montserrat-Medium', 500, normal, ttf );
+@include font-face( 'Montserrat', '../fonts/Montserrat-Regular', 400, normal, ttf );
+@include font-face( 'Montserrat', '../fonts/Montserrat-SemiBold', 600, normal, ttf );
+
+@include font-face( 'MrDafoe', '../fonts/MrDafoe-Regular', 400, normal, ttf );
+
+@include font-face( 'Raleway', '../fonts/Raleway-Medium', 500, normal, ttf );
+@include font-face( 'Raleway', '../fonts/Raleway-Regular', 400, normal, ttf );
+@include font-face( 'Raleway', '../fonts/Raleway-SemiBold', 600, normal, ttf );
